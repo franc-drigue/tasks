@@ -12,4 +12,13 @@ class PersonRepository {
     suspend fun login(email: String, password: String): Response<PersonModel> {
         return remote.login(email, password)
     }
+
+    suspend fun create(name: String, email: String, password: String, receivenews: String): Response<PersonModel> {
+        return remote.create(
+            name,
+            email,
+            password,
+            receivenews
+        )
+    }
 }

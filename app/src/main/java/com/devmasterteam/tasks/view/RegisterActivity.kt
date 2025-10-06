@@ -9,11 +9,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.devmasterteam.tasks.R
-import com.devmasterteam.tasks.databinding.ActivityLoginBinding
 import com.devmasterteam.tasks.databinding.ActivityRegisterBinding
-import com.devmasterteam.tasks.viewmodel.LoginViewModel
 import com.devmasterteam.tasks.viewmodel.RegisterViewModel
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
@@ -54,12 +51,21 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun observe() {
-
+         viewModel.createUser.observe(this) {
+             if (it.isSuccess()) {
+                 val intent = Intent(applicationContext, MainActivity::class.java)
+                 startActivity(intent)
+             }else {
+                 Toast.makeText(applicationContext, it.message(), Toast.LENGTH_SHORT).show()
+             }
+         }
     }
 
     private fun handleSave() {
         val name = binding.editName.text.toString()
         val email = binding.editEmail.text.toString()
         val password = binding.editPassword.text.toString()
+
+        viewModel.create(name,email,password)
     }
 }
