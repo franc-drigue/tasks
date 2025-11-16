@@ -6,4 +6,6 @@ import com.devmasterteam.tasks.service.repository.local.PreferencesManager
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val preferencesManager = PreferencesManager(application.applicationContext)
+
+
 }
